@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - TeeStore{% endblock %}
+
+{% block content %}
+<section class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold">My Profile</h1>
+    </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl font-bold text-gray-600">{{ user.username|slice:":1"|upper }}</span>
+                </div>
+                <h2 class="text-xl font-semibold text-gray-900">{{ user.username }}</h2>
+                <p class="text-gray-500">{{ user.email }}</p>
+                <a href="{% url 'order_history' %}" class="mt-4 inline-block px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium">
+                    View Orders
+                </a>
+            </div>
+        </div>
+
+        <div class="md:col-span-2">
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-medium text-gray-900">Account Information</h2>
+                </div>
+                <div class="p-6">
+                    <dl class="space-y-4">
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <dt class="text-gray-600">Username</dt>
+                            <dd class="font-medium text-gray-900">{{ user.username }}</dd>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-gray-100">
+                            <dt class="text-gray-600">Email</dt>
+                            <dd class="font-medium text-gray-900">{{ user.email }}</dd>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <dt class="text-gray-600">Member since</dt>
+                            <dd class="font-medium text-gray-900">{{ user.date_joined|date:"F d, Y" }}</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

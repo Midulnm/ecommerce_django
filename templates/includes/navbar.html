@@ -1,0 +1,76 @@
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <a href="{% url 'home' %}" class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">T</span>
+                </div>
+                <span class="text-xl font-bold text-gray-900">TeeStore</span>
+            </a>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="{% url 'product_list' %}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">Products</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'cart_view' %}" class="relative p-2 text-gray-600 hover:text-primary-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    {% if cart_items_count > 0 %}
+                    <span class="absolute -top-1 -right-1 bg-primary-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                        {{ cart_items_count }}
+                    </span>
+                    {% endif %}
+                </a>
+
+                {% if user.is_authenticated %}
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="{% url 'order_history' %}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">Orders</a>
+                        <a href="{% url 'logout' %}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">Logout</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <span class="text-gray-600 font-medium text-sm">{{ user.username|slice:":1"|upper }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="{% url 'login' %}" class="text-gray-600 hover:text-primary-600 transition-colors font-medium">Login</a>
+                        <a href="{% url 'register' %}" class="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                            Sign Up
+                        </a>
+                    </div>
+                {% endif %}
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-4 py-3 space-y-3">
+            <a href="{% url 'product_list' %}" class="block text-gray-600 hover:text-primary-600 font-medium">Products</a>
+            <a href="{% url 'cart_view' %}" class="block text-gray-600 hover:text-primary-600 font-medium">Cart</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'order_history' %}" class="block text-gray-600 hover:text-primary-600 font-medium">Orders</a>
+                <a href="{% url 'logout' %}" class="block text-gray-600 hover:text-primary-600 font-medium">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="block text-gray-600 hover:text-primary-600 font-medium">Login</a>
+                <a href="{% url 'register' %}" class="block text-primary-600 hover:text-primary-700 font-medium">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+</script>
