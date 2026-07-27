@@ -28,6 +28,9 @@
                             <div class="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 mr-4">
                                 {% if item.product.image %}
                                     <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-full h-full object-cover">
+                                {% else %}
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuXSoDhXpNb4MysEOYQ8bB4Vr6oKNQtsapSw&s" 
+                                         alt="{{ item.product.name }}" class="w-full h-full object-cover">
                                 {% endif %}
                             </div>
                             <div class="flex-1">
